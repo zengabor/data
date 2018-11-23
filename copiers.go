@@ -3,33 +3,33 @@ package data
 import "fmt"
 
 // Copies values, and sets flag if there was a change in the destination
-type changeAwareCopier bool
+type ChangeAwareCopier bool
 
-func (c *changeAwareCopier) DestinationUpdated() bool {
+func (c *ChangeAwareCopier) DestinationUpdated() bool {
 	return bool(*c)
 }
 
-func (c *changeAwareCopier) copyString(src string, dst *string) {
+func (c *ChangeAwareCopier) CopyString(src string, dst *string) {
 	if *dst != src {
 		*dst = src
 		*c = true
 	}
 }
 
-func (c *changeAwareCopier) copyStringIfAny(src string, dst *string) {
+func (c *ChangeAwareCopier) CopyStringIfAny(src string, dst *string) {
 	if len(src) > 0 {
 		c.copyString(src, dst)
 	}
 }
 
-func (c *changeAwareCopier) copyStringIfMissing(src string, dst *string) {
+func (c *ChangeAwareCopier) CopyStringIfMissing(src string, dst *string) {
 	if len(*dst) == 0 && len(src) > 0 && *dst != src {
 		*dst = src
 		*c = true
 	}
 }
 
-func (c *changeAwareCopier) copyStringWithWarning(src string, dst *string, fieldName string) string {
+func (c *ChangeAwareCopier) CopyStringWithWarning(src string, dst *string, fieldName string) string {
 	if len(src) == 0 {
 		return fmt.Sprintf("MISSING FIELD: %s", fieldName)
 	}
@@ -37,7 +37,7 @@ func (c *changeAwareCopier) copyStringWithWarning(src string, dst *string, field
 	return ""
 }
 
-func (c *changeAwareCopier) copyNilBool(src NilBool, dst *NilBool) {
+func (c *ChangeAwareCopier) CopyNilBool(src NilBool, dst *NilBool) {
 	if *dst != src {
 		*dst = src
 		*c = true
@@ -45,9 +45,9 @@ func (c *changeAwareCopier) copyNilBool(src NilBool, dst *NilBool) {
 }
 
 // Copies values and sets flag if destination differs from source
-type diffAwareCopier bool
+type DiffAwareCopier bool
 
-func (d *diffAwareCopier) copyStringIfMissing(src string, dst *string) {
+func (d *DiffAwareCopier) CopyStringIfMissing(src string, dst *string) {
 	if len(*dst) == 0 && len(src) > 0 {
 		*dst = src
 	}
@@ -57,6 +57,6 @@ func (d *diffAwareCopier) copyStringIfMissing(src string, dst *string) {
 	}
 }
 
-func (d *diffAwareCopier) Different() bool {
+func (d *DiffAwareCopier) Different() bool {
 	return bool(*d)
 }
