@@ -18,7 +18,7 @@ func (c *ChangeAwareCopier) CopyString(src string, dst *string) {
 
 func (c *ChangeAwareCopier) CopyStringIfAny(src string, dst *string) {
 	if len(src) > 0 {
-		c.copyString(src, dst)
+		c.CopyString(src, dst)
 	}
 }
 
@@ -33,7 +33,7 @@ func (c *ChangeAwareCopier) CopyStringWithWarning(src string, dst *string, field
 	if len(src) == 0 {
 		return fmt.Sprintf("MISSING FIELD: %s", fieldName)
 	}
-	c.copyString(src, dst)
+	c.CopyString(src, dst)
 	return ""
 }
 

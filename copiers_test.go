@@ -14,8 +14,8 @@ func TestChangeAwareCopierString(t *testing.T) {
 		{"abc", "def", "abc", true},
 	}
 	for i, test := range stringTests {
-		var c changeAwareCopier
-		c.copyString(test.in, &test.out)
+		var c ChangeAwareCopier
+		c.CopyString(test.in, &test.out)
 		if c.DestinationUpdated() != test.want {
 			t.Errorf("#%d want %v, got %v", i, test.want, c.DestinationUpdated())
 		}
@@ -37,8 +37,8 @@ func TestChangeAwareCopierStringIfAny(t *testing.T) {
 		{"abc", "def", true},
 	}
 	for i, test := range stringTests {
-		var c changeAwareCopier
-		if c.copyStringIfAny(test.in, &test.out); c.DestinationUpdated() != test.want {
+		var c ChangeAwareCopier
+		if c.CopyStringIfAny(test.in, &test.out); c.DestinationUpdated() != test.want {
 			t.Errorf("#%d want %v, got %v", i, test.want, c.DestinationUpdated())
 		}
 	}
@@ -56,8 +56,8 @@ func TestChangeAwareCopierStringWithWarning(t *testing.T) {
 		{"abc", "def", true},
 	}
 	for i, test := range stringTests {
-		var c changeAwareCopier
-		if c.copyStringWithWarning(test.in, &test.out, "warning"); c.DestinationUpdated() != test.want {
+		var c ChangeAwareCopier
+		if c.CopyStringWithWarning(test.in, &test.out, "warning"); c.DestinationUpdated() != test.want {
 			t.Errorf("#%d want %v, got %v", i, test.want, c.DestinationUpdated())
 		}
 	}
@@ -75,8 +75,8 @@ func TestChangeAwareCopierStringIfMissing(t *testing.T) {
 		{"abc", "def", false},
 	}
 	for i, test := range stringTests {
-		var c changeAwareCopier
-		if c.copyStringIfMissing(test.in, &test.out); c.DestinationUpdated() != test.want {
+		var c ChangeAwareCopier
+		if c.CopyStringIfMissing(test.in, &test.out); c.DestinationUpdated() != test.want {
 			t.Errorf("#%d want %v, got %v", i, test.want, c.DestinationUpdated())
 		}
 	}
@@ -94,8 +94,8 @@ func TestDiffAwareCopierStringIfMissing(t *testing.T) {
 		{"abc", "def", "def", true},
 	}
 	for i, test := range stringTests {
-		var c diffAwareCopier
-		c.copyStringIfMissing(test.in, &test.out)
+		var c DiffAwareCopier
+		c.CopyStringIfMissing(test.in, &test.out)
 		if c.Different() != test.want {
 			t.Errorf("#%d want %v, got %v", i, test.want, c.Different())
 		}
