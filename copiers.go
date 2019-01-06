@@ -1,6 +1,9 @@
 package data
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 // Copies values, and sets flag if there was a change in the destination
 type ChangeAwareCopier bool
@@ -35,6 +38,20 @@ func (c *ChangeAwareCopier) CopyStringWithWarning(src string, dst *string, field
 	}
 	c.CopyString(src, dst)
 	return ""
+}
+
+func (c *ChangeAwareCopier) CopyInt(src int, dst *int) {
+	if *dst != src {
+		*dst = src
+		*c = true
+	}
+}
+
+func (c *ChangeAwareCopier) CopyTime(src time.Time, dst *time.Time) {
+	if !dst.Equal(src) {
+		*dst = src
+		*c = true
+	}
 }
 
 func (c *ChangeAwareCopier) CopyNilBool(src NilBool, dst *NilBool) {
