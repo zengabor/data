@@ -54,6 +54,13 @@ func (c *ChangeAwareCopier) CopyTime(src time.Time, dst *time.Time) {
 	}
 }
 
+func (c *ChangeAwareCopier) CopyBool(src bool, dst *bool) {
+	if *dst != src {
+		*dst = src
+		*c = true
+	}
+}
+
 func (c *ChangeAwareCopier) CopyNilBool(src NilBool, dst *NilBool) {
 	if *dst != src {
 		*dst = src
