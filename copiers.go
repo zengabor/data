@@ -48,6 +48,9 @@ func (c *ChangeAwareCopier) CopyInt(src int, dst *int) {
 }
 
 func (c *ChangeAwareCopier) CopyTime(src time.Time, dst *time.Time) {
+	if dst == nil {
+		dst = &time.Time{}
+	}
 	if !dst.Equal(src) {
 		*dst = src
 		*c = true
