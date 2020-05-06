@@ -36,7 +36,7 @@ func (nb NilBool) Set(value bool) {
 }
 
 func (nb NilBool) IsSet() bool {
-	return nb != NilBoolUnset
+	return nb == NilBoolTrue || nb == NilBoolFalse
 }
 
 func (nb NilBool) IsTrue() bool {
