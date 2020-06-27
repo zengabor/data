@@ -6,3 +6,7 @@ import "time"
 func Now() time.Time {
 	return time.Now().Round(time.Microsecond).UTC()
 }
+
+func NowSeconds() time.Time {
+	return time.Now().Round(time.Second).UTC()
+}
