@@ -5,7 +5,7 @@ import (
 	// "strings"
 	"time"
 
-	"github.com/oklog/ulid"
+	"github.com/oklog/ulid/v2"
 )
 
 func NewULID() string {
